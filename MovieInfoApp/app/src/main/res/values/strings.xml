@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Movie Info App</string>
+    <string name="actor_name">Actor Name</string>
+    <string name="birthday">Birthday</string>
+    <string name="birth_place">Birth Place</string>
+    <string name="list_item_name">List Item Name</string>
+    <string name="movie_title">Movie Title</string>
+    <string name="year">Year</string>
+    <string name="runtime">Runtime</string>
+    <string name="search_by_actor_hint">Search by actor</string>
+    <string name="movies_and_tv_shows">Movies and TV Shows</string>
+    <string name="actors">Actors</string>
+    <string name="what_would_you_like_to_search">What would you like to search?</string>
+    <string name="search_by_movie_or_show_hint">Search by movie or show</string>
+</resources>

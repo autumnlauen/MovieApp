@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingEnd="32dp"
+    android:paddingStart="32dp"
+    android:paddingBottom="32dp"
+    android:paddingTop="32dp"
+    android:orientation="vertical"
+    android:gravity="center">
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        android:text="@string/what_would_you_like_to_search"
+        android:layout_marginBottom="32dp"
+        android:layout_marginTop="16dp"/>
+
+    <Button
+        android:id="@+id/chooseMovieButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginBottom="8dp"
+        android:text="@string/movies_and_tv_shows" />
+
+    <Button
+        android:id="@+id/chooseActorButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginTop="8dp"
+        android:text="@string/actors" />
+
+</LinearLayout>

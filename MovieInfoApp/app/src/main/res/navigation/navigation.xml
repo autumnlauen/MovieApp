@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation.xml"
+    app:startDestination="@id/chooseFragment">
+    <fragment
+        android:id="@+id/chooseFragment"
+        android:name="com.example.movieinfoapp.choose.ChooseFragment"
+        android:label="choose_fragment"
+        tools:layout="@layout/fragment_choose" >
+        <action
+            android:id="@+id/action_chooseFragment_to_movieSearchFragment"
+            app:destination="@id/movieSearchFragment" />
+        <action
+            android:id="@+id/action_chooseFragment_to_actorSearchFragment"
+            app:destination="@id/actorSearchFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/actorSearchFragment"
+        android:name="com.example.movieinfoapp.actor.actorSearch.ActorSearchFragment"
+        android:label="actor_search_fragment"
+        tools:layout="@layout/fragment_actor_search" >
+        <action
+            android:id="@+id/action_actorSearchFragment_to_movieFragment"
+            app:destination="@id/movieFragment" />
+        <action
+            android:id="@+id/action_actorSearchFragment_to_actorFragment"
+            app:destination="@id/actorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/movieFragment"
+        android:name="com.example.movieinfoapp.movie.movieDetail.MovieDetailFragment"
+        android:label="movie_fragment"
+        tools:layout="@layout/fragment_movie_detail" >
+        <action
+            android:id="@+id/action_movieFragment_to_actorFragment"
+            app:destination="@id/actorFragment" />
+        <argument
+            android:name="movieId"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/movieSearchFragment"
+        android:name="com.example.movieinfoapp.movie.movieSearch.MovieSearchFragment"
+        android:label="movie_search_fragment"
+        tools:layout="@layout/fragment_movie_search" >
+        <action
+            android:id="@+id/action_movieSearchFragment_to_actorFragment"
+            app:destination="@id/actorFragment" />
+        <action
+            android:id="@+id/action_movieSearchFragment_to_movieFragment"
+            app:destination="@id/movieFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/actorFragment"
+        android:name="com.example.movieinfoapp.actor.actorDetail.ActorDetailFragment"
+        android:label="actor_fragment"
+        tools:layout="@layout/fragment_actor_detail" >
+        <action
+            android:id="@+id/action_actorFragment_to_movieFragment"
+            app:destination="@id/movieFragment" />
+        <argument
+            android:name="actorId"
+            app:argType="integer" />
+    </fragment>
+</navigation>
