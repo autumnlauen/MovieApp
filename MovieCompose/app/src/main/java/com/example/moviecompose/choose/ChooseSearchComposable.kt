@@ -6,27 +6,11 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import com.example.moviecompose.searchmovies.SearchMoviesScreen
+import androidx.navigation.NavController
 
 @Composable
-@Preview
-fun ChooseSearchComposable() {
-
-    val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = "choose") {
-        composable("choose") {
-            ChooseSearchComposable()
-        }
-        composable("searchMovies") {
-            SearchMoviesScreen()
-        }
-    }
-
+fun ChooseSearchComposable(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -39,7 +23,7 @@ fun ChooseSearchComposable() {
             modifier = Modifier.padding(16.dp)
         )
         Button(
-            onClick = { /*TODO*/ },
+            onClick = { navController.navigate("searchMovies") },
             modifier = Modifier
                 .padding(16.dp)
                 .size(200.dp, 200.dp)

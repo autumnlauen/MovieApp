@@ -20,7 +20,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.moviecompose.choose.ChooseSearchComposable
 import com.example.moviecompose.choose.ChooseSearchViewModel
+import com.example.moviecompose.searchmovies.SearchMoviesScreen
 
 val testMovies = listOf(
     Movie("Oceans 8"),
@@ -34,14 +39,11 @@ val testMovies = listOf(
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        val chooseSearchViewModel: ChooseSearchViewModel by viewModels()
-
         setContent {
             MovieComposeTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    MovieList(testMovies)
+                    Navigation()
                 }
             }
         }
