@@ -5,6 +5,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.moviecompose.choose.ChooseSearchComposable
+import com.example.moviecompose.searchactors.SearchActorsScreen
 import com.example.moviecompose.searchmovies.SearchMoviesScreen
 
 @Composable
@@ -16,6 +17,9 @@ fun Navigation() {
         }
         composable("searchMovies") {
             SearchMoviesScreen()
+        }
+        composable("searchActors") {
+            SearchActorsScreen()
         }
     }
 }

@@ -1,4 +1,5 @@
-package com.example.moviecompose.searchmovies
+package com.example.moviecompose.searchactors
+
 
 import android.R
 import androidx.compose.foundation.Image
@@ -11,13 +12,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.TextFieldValue
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-@Preview
-fun SearchMoviesScreen() {
+fun SearchActorsScreen() {
 
     val text = remember { mutableStateOf(TextFieldValue()) }
 
@@ -36,7 +35,7 @@ fun SearchMoviesScreen() {
                 )
             },
             onValueChange = { text.value = it },
-            label = { Text(text = "Search by movie") },
+            label = { Text(text = "Search by actor") },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(8.dp)
