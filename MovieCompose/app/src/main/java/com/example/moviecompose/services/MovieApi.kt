@@ -1,7 +1,7 @@
 package com.example.moviecompose.services
 
 import android.util.Log
-import com.example.moviecompose.searchmovies.SearchedMovies
+import com.example.moviecompose.movies.SearchedMovies
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient

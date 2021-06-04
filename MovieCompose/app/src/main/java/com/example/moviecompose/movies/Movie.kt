@@ -1,4 +1,4 @@
-package com.example.moviecompose
+package com.example.moviecompose.movies
 
 data class Movie(
     val title: String,

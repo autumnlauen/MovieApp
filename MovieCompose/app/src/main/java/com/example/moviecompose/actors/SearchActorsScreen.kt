@@ -1,4 +1,4 @@
-package com.example.moviecompose.searchactors
+package com.example.moviecompose.actors
 
 
 import android.R

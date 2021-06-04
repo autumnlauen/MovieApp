@@ -5,8 +5,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.moviecompose.choose.ChooseSearchComposable
-import com.example.moviecompose.searchactors.SearchActorsScreen
-import com.example.moviecompose.searchmovies.SearchMoviesScreen
+import com.example.moviecompose.actors.SearchActorsScreen
+import com.example.moviecompose.movies.MovieDetailsScreen
+import com.example.moviecompose.movies.SearchMoviesScreen
 
 @Composable
 fun Navigation() {
@@ -16,10 +17,13 @@ fun Navigation() {
             ChooseSearchComposable(navController = navController)
         }
         composable("searchMovies") {
-            SearchMoviesScreen()
+            SearchMoviesScreen(navController = navController)
         }
         composable("searchActors") {
             SearchActorsScreen()
+        }
+        composable("movieDetails") {
+            MovieDetailsScreen()
         }
     }
 }
