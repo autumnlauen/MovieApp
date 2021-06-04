@@ -13,17 +13,23 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.TextFieldValue
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.moviecompose.Movie
+import com.example.moviecompose.services.API_KEY
+import com.example.moviecompose.services.IMAGE_BASE_URL
+import com.example.moviecompose.services.MovieApiService
+import com.google.accompanist.coil.rememberCoilPainter
+import kotlinx.coroutines.launch
 
 @Composable
-@Preview
 fun SearchMoviesScreen() {
 
     val text = remember { mutableStateOf(TextFieldValue()) }
 
-    val listOfMovies = remember { mutableStateOf(emptyList<Movie>())}
+    val listOfMovies = remember { mutableStateOf(emptyList<Movie>()) }
+
+    val coroutineScope = rememberCoroutineScope()
 
     Column(
         modifier = Modifier
@@ -49,32 +55,28 @@ fun SearchMoviesScreen() {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(8.dp),
-            onClick = { listOfMovies.value = testMovies }) {
+            onClick = {
+                coroutineScope.launch {
+                    listOfMovies.value =
+                        MovieApiService.retrofitService.getSearchedMovies(
+                            text.value.text,
+                            API_KEY
+                        ).results
+                }
+            }
+        ) {
             Text(text = "Search", fontSize = 20.sp)
         }
         MovieList(movies = listOfMovies.value)
     }
 }
 
-val testMovies = listOf(
-    Movie("Oceans 8"),
-    Movie("John Tucker Must Die"),
-    Movie("Clueless"),
-    Movie("Oceans 8"),
-    Movie("John Tucker Must Die"),
-    Movie("Clueless")
-)
-
-data class Movie(
-    val title: String
-)
-
 @Composable
 fun MovieList(
     movies: List<Movie>?
 ) {
     if (movies == null) {
-        Column() {
+        Column {
         }
     } else {
         LazyColumn {
@@ -89,9 +91,10 @@ fun MovieList(
 fun MovieRow(movie: Movie) {
     Row(modifier = Modifier.fillMaxWidth()) {
         Image(
-            painter = painterResource(id = android.R.drawable.btn_star_big_on),
-            contentDescription = "star",
-            modifier = Modifier.size(80.dp, 80.dp)
+            painter = rememberCoilPainter(
+                request = "$IMAGE_BASE_URL${movie.poster_path}"
+            ),
+            contentDescription = "Movie image",
         )
         Text(
             text = movie.title,
