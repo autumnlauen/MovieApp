@@ -1,8 +1,10 @@
 package com.example.moviecompose
 
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.navArgument
 import androidx.navigation.compose.rememberNavController
 import com.example.moviecompose.choose.ChooseSearchComposable
 import com.example.moviecompose.actors.SearchActorsScreen
@@ -22,8 +24,11 @@ fun Navigation() {
         composable("searchActors") {
             SearchActorsScreen()
         }
-        composable("movieDetails") {
-            MovieDetailsScreen()
+        composable(
+            "movieDetails/{movieId}",
+            arguments = listOf(navArgument("movieId") { type = NavType.IntType })
+        ) {
+            MovieDetailsScreen(it.arguments?.getInt("movieId"))
         }
     }
 }

@@ -91,7 +91,9 @@ fun MovieList(
 @Composable
 fun MovieRow(movie: Movie, navController: NavController) {
     Button(
-        onClick = { navController.navigate("movieDetails") },
+        onClick = {
+            navController.navigate("movieDetails/${movie.id}")
+        },
         colors = ButtonDefaults.buttonColors(backgroundColor = Color.White)
     ) {
         Row(
