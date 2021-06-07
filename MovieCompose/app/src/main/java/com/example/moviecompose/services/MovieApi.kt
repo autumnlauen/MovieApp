@@ -1,6 +1,7 @@
 package com.example.moviecompose.services
 
 import android.util.Log
+import com.example.moviecompose.movies.Movie
 import com.example.moviecompose.movies.SearchedMovies
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -9,6 +10,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 private const val BASE_URL = "https://api.themoviedb.org/3/"
@@ -40,6 +42,12 @@ interface MovieApi {
         @Query("query") query: String,
         @Query("api_key") apiKey: String
     ): SearchedMovies
+
+    @GET("movie/{movie_id}")
+    suspend fun getClickedMovie(
+        @Path("movie_id") movieId: Int,
+        @Query("api_key") apiKey: String
+    ): Movie
 }
 
 object MovieApiService {
