@@ -1,6 +1,8 @@
 package com.example.moviecompose.services
 
 import android.util.Log
+import com.example.moviecompose.actors.Actor
+import com.example.moviecompose.actors.ActorCredits
 import com.example.moviecompose.actors.SearchedActors
 import com.example.moviecompose.movies.Movie
 import com.example.moviecompose.movies.MovieCredits
@@ -62,6 +64,18 @@ interface MovieApi {
         @Query("query") query: String,
         @Query("api_key") apiKey: String
     ): SearchedActors
+
+    @GET("person/{person_id}")
+    suspend fun getClickedActor(
+        @Path("person_id") personId: Int,
+        @Query("api_key") apiKey: String
+    ): Actor
+
+    @GET("person/{person_id}/movie_credits")
+    suspend fun getActorCredits(
+        @Path("person_id") personId: Int,
+        @Query("api_key") apiKey: String
+    ): ActorCredits
 }
 
 object MovieApiService {

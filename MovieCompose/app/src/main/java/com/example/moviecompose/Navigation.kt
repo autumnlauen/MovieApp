@@ -8,6 +8,7 @@ import androidx.navigation.compose.navArgument
 import androidx.navigation.compose.rememberNavController
 import com.example.moviecompose.choose.ChooseSearchComposable
 import com.example.moviecompose.actors.SearchActorsScreen
+import com.example.moviecompose.movies.ActorDetailsScreen
 import com.example.moviecompose.movies.MovieDetailsScreen
 import com.example.moviecompose.movies.SearchMoviesScreen
 
@@ -31,6 +32,16 @@ fun Navigation() {
             MovieDetailsScreen(
                 navController = navController,
                 movieId = it.arguments?.getInt("movieId")!!
+            )
+        }
+        composable(
+            "actorDetails/{actorId}",
+            arguments = listOf(
+                navArgument("actorId") { type = NavType.IntType })
+        ) {
+            ActorDetailsScreen(
+                navController = navController,
+                actorId = it.arguments?.getInt("actorId")!!
             )
         }
     }

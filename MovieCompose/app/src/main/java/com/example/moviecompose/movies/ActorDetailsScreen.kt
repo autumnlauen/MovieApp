@@ -15,6 +15,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.moviecompose.actors.ActorCredits
+import com.example.moviecompose.actors.MovieForCredits
 import com.example.moviecompose.services.API_KEY
 import com.example.moviecompose.services.IMAGE_BASE_URL
 import com.example.moviecompose.services.MovieApiService
@@ -22,55 +24,55 @@ import com.google.accompanist.coil.rememberCoilPainter
 import kotlinx.coroutines.runBlocking
 
 @Composable
-fun MovieDetailsScreen(navController: NavController, movieId: Int) {
+fun ActorDetailsScreen(navController: NavController, actorId: Int) {
 
-    val movie = runBlocking {
-        MovieApiService.retrofitService.getClickedMovie(movieId, API_KEY)
+    val actor = runBlocking {
+        MovieApiService.retrofitService.getClickedActor(actorId, API_KEY)
     }
 
     val actorCredits = runBlocking {
-        MovieApiService.retrofitService.getMovieCredits(movieId, API_KEY)
+        MovieApiService.retrofitService.getActorCredits(actorId, API_KEY)
     }
 
     Column {
         Row(Modifier.padding(8.dp)) {
             Image(
                 painter = rememberCoilPainter(
-                    request = "$IMAGE_BASE_URL${movie.poster_path}"
+                    request = "$IMAGE_BASE_URL${actor.profile_path}"
                 ),
-                contentDescription = "Movie poster",
+                contentDescription = "Actor picture",
                 modifier = Modifier.size(width = 150.dp, height = 200.dp)
             )
             Column {
-                Text(text = movie.title, fontSize = 32.sp)
-                Text(text = movie.releaseDate, fontSize = 22.sp)
-                Text(text = movie.runtimeString, fontSize = 22.sp)
+                Text(text = actor.name, fontSize = 32.sp)
+                Text(text = actor.age, fontSize = 22.sp)
+                Text(text = actor.placeOfBirth, fontSize = 22.sp)
             }
         }
-        MovieCreditsList(actors = actorCredits, navController = navController)
+        ActorCreditsList(movies = actorCredits, navController = navController)
     }
 }
 
 @Composable
-fun MovieCreditsList(
-    actors: MovieCredits,
+fun ActorCreditsList(
+    movies: ActorCredits,
     navController: NavController
 ) {
     LazyColumn {
-        items(actors.cast) { actor ->
-            ActorRow(actor = actor, navController = navController)
+        items(movies.cast) { movie ->
+            MovieRow(movie = movie, navController = navController)
         }
     }
 }
 
 @Composable
-fun ActorRow(
-    actor: ActorForCredits,
+fun MovieRow(
+    movie: MovieForCredits,
     navController: NavController
 ) {
     Button(
         onClick = {
-            navController.navigate("actorDetails/${actor.id}")
+            navController.navigate("movieDetails/${movie.id}")
         },
         colors = ButtonDefaults.buttonColors(backgroundColor = Color.White)
     ) {
@@ -81,13 +83,13 @@ fun ActorRow(
         ) {
             Image(
                 painter = rememberCoilPainter(
-                    request = "$IMAGE_BASE_URL${actor.profile_path}"
+                    request = "$IMAGE_BASE_URL${movie.poster_path}"
                 ),
-                contentDescription = "Actor image",
+                contentDescription = "Movie image",
                 modifier = Modifier.padding(8.dp)
             )
             Text(
-                text = actor.nameString,
+                text = movie.titleString,
                 fontSize = 20.sp,
                 modifier = Modifier.align(Alignment.CenterVertically)
             )
