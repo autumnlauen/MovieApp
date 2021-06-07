@@ -2,6 +2,7 @@ package com.example.moviecompose.services
 
 import android.util.Log
 import com.example.moviecompose.movies.Movie
+import com.example.moviecompose.movies.MovieCredits
 import com.example.moviecompose.movies.SearchedMovies
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -48,6 +49,12 @@ interface MovieApi {
         @Path("movie_id") movieId: Int,
         @Query("api_key") apiKey: String
     ): Movie
+
+    @GET("movie/{movie_id}/credits")
+    suspend fun getMovieCredits(
+        @Path("movie_id") movieId: Int,
+        @Query("api_key") apiKey: String
+    ): MovieCredits
 }
 
 object MovieApiService {

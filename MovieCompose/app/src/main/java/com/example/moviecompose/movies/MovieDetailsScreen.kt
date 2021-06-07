@@ -1,28 +1,98 @@
 package com.example.moviecompose.movies
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.moviecompose.services.API_KEY
+import com.example.moviecompose.services.IMAGE_BASE_URL
 import com.example.moviecompose.services.MovieApiService
+import com.google.accompanist.coil.rememberCoilPainter
 import kotlinx.coroutines.runBlocking
 
 @Composable
-fun MovieDetailsScreen(movieId: Int) {
+fun MovieDetailsScreen(navController: NavController, movieId: Int) {
 
-    /*Column {
-        Row {
-            Image(painter = , contentDescription =)
-            Column {
-                Text(text =)
-                Text(text =)
-                Text(text =)
-            }
-        }
-    }*/
-    
     val movie = runBlocking {
         MovieApiService.retrofitService.getClickedMovie(movieId, API_KEY)
     }
 
-    Text(text = movie.title)
+    val actorCredits = runBlocking {
+        MovieApiService.retrofitService.getMovieCredits(movieId, API_KEY)
+    }
+
+    Column {
+        Row {
+            Image(
+                painter = rememberCoilPainter(
+                    request = "$IMAGE_BASE_URL${movie.poster_path}"
+                ),
+                contentDescription = "Movie poster"
+            )
+            Column {
+                Text(text = movie.title)
+                Text(text = movie.releaseDate)
+                Text(text = movie.runtimeString)
+            }
+        }
+        MovieCreditsList(actors = actorCredits, navController = navController)
+    }
+}
+
+@Composable
+fun MovieCreditsList(
+    actors: MovieCredits,
+    navController: NavController
+) {
+    LazyColumn {
+        items(actors.cast) { actor ->
+            ActorRow(actor = actor, navController = navController)
+        }
+    }
+}
+
+@Composable
+fun ActorRow(
+    actor: ActorForCredits,
+    navController: NavController
+) {
+    Button(
+        onClick = {
+            navController.navigate("actorDetails/${actor.id}")
+        },
+        colors = ButtonDefaults.buttonColors(backgroundColor = Color.White)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .shadow(elevation = 1.dp)
+        ) {
+            Image(
+                painter = rememberCoilPainter(
+                    request = "$IMAGE_BASE_URL${actor.profile_path}"
+                ),
+                contentDescription = "Actor image",
+                modifier = Modifier.padding(8.dp)
+            )
+            Text(
+                text = actor.nameString,
+                fontSize = 20.sp,
+                modifier = Modifier.align(Alignment.CenterVertically)
+            )
+        }
+    }
 }

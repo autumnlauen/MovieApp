@@ -28,7 +28,10 @@ fun Navigation() {
             "movieDetails/{movieId}",
             arguments = listOf(navArgument("movieId") { type = NavType.IntType })
         ) {
-            MovieDetailsScreen(it.arguments?.getInt("movieId")!!)
+            MovieDetailsScreen(
+                navController = navController,
+                movieId = it.arguments?.getInt("movieId")!!
+            )
         }
     }
 }
