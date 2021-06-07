@@ -42,7 +42,7 @@ fun SearchMoviesScreen(navController: NavController) {
             leadingIcon = {
                 Image(
                     painter = painterResource(id = R.drawable.ic_menu_search),
-                    contentDescription = "search"
+                    contentDescription = "Search"
                 )
             },
             onValueChange = { text.value = it },

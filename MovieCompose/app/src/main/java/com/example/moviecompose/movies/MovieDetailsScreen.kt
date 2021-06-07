@@ -1,10 +1,7 @@
 package com.example.moviecompose.movies
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Button
@@ -36,17 +33,18 @@ fun MovieDetailsScreen(navController: NavController, movieId: Int) {
     }
 
     Column {
-        Row {
+        Row (Modifier.padding(8.dp)){
             Image(
                 painter = rememberCoilPainter(
                     request = "$IMAGE_BASE_URL${movie.poster_path}"
                 ),
-                contentDescription = "Movie poster"
+                contentDescription = "Movie poster",
+                modifier = Modifier.size(width = 150.dp, height = 200.dp)
             )
             Column {
-                Text(text = movie.title)
-                Text(text = movie.releaseDate)
-                Text(text = movie.runtimeString)
+                Text(text = movie.title, fontSize = 32.sp)
+                Text(text = movie.releaseDate, fontSize = 22.sp)
+                Text(text = movie.runtimeString, fontSize = 22.sp)
             }
         }
         MovieCreditsList(actors = actorCredits, navController = navController)

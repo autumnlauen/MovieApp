@@ -22,7 +22,7 @@ fun Navigation() {
             SearchMoviesScreen(navController = navController)
         }
         composable("searchActors") {
-            SearchActorsScreen()
+            SearchActorsScreen(navController = navController)
         }
         composable(
             "movieDetails/{movieId}",
